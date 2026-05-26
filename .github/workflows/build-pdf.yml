@@ -25,12 +25,19 @@ jobs:
         id: changed
         run: |
           CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '\.lex$' || true)
+          RENAMED_FROM=$(git diff --name-status HEAD~1 HEAD | awk '/^R[0-9]*\t.*\.lex$/ {print $2}' || true)
+
           if [ -z "$CHANGED" ]; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
             ENCODED=$(echo "$CHANGED" | base64 -w 0)
             echo "files_b64=${ENCODED}" >> $GITHUB_OUTPUT
             echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+          if [ -n "$RENAMED_FROM" ]; then
+            ENCODED_OLD=$(echo "$RENAMED_FROM" | base64 -w 0)
+            echo "renamed_from_b64=${ENCODED_OLD}" >> $GITHUB_OUTPUT
           fi
 
       - name: Install LaTeX
@@ -44,6 +51,15 @@ jobs:
             texlive-fonts-recommended \
             texlive-lang-french \
             latexmk
+
+      - name: Remove renamed PDFs
+        if: steps.changed.outputs.renamed_from_b64 != ''
+        run: |
+          while IFS= read -r OLD_LEX; do
+            [ -z "$OLD_LEX" ] && continue
+            OLD_BASE=$(basename "$OLD_LEX" .lex)
+            git rm --ignore-unmatch "${OLD_BASE}.pdf" || true
+          done < <(echo "${{ steps.changed.outputs.renamed_from_b64 }}" | base64 -d)
 
       - name: Compile .lex files to PDF
         if: steps.changed.outputs.has_changes == 'true'
