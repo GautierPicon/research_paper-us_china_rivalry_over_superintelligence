@@ -8,7 +8,7 @@
 \usepackage{hyperref}
 
 \title{En quoi la rivalité technologique entre la Chine et Les État-Unis est elle une menace pour la geopolitique futur ?}
-\author{Auteur}
+\author{Gautier Picon}
 \date{Date}
 
 \begin{document}
