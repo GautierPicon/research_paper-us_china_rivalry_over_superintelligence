@@ -4,26 +4,15 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage[margin=2.5cm]{geometry}
-\usepackage{microtype}
+\usepackage[expansion=false]{microtype}
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{titlesec}
 \usepackage{setspace}
+\usepackage{lmodern}
 
 \definecolor{bleu}{RGB}{20,40,120}
-
-\title{
-    \Huge \textbf{En quoi la rivalité technologique entre la Chine et les État-Unis est-elle une menace pour la geopolitique futur ?}\\[0.5cm]
-}
-
-\author{
-    Gautier Picon
-}
-
-\date{
-    Juin 2026
-}
 
 \begin{document}
 
@@ -33,7 +22,7 @@
     \vspace*{2cm}
 
     {\Huge\bfseries\color{bleu}
-    En quoi la rivalité technologique entre la Chine et les État-Unis est-elle une menace pour la geopolitique futur ?\par}
+    En quoi la rivalité technologique entre la Chine et les État-Unis est-elle une menace pour la géopolitique future ?\par}
 
     \vspace{1cm}
 
@@ -42,8 +31,8 @@
     \vspace{1cm}
 
     {\large
-    \textbf Gautier Picon\\
-    \textbf Juin 2026
+    \textbf{Gautier Picon}\\[0.3cm]
+    \textbf{Juin 2026}
     }
 
 \end{titlepage}
