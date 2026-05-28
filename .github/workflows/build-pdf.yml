@@ -87,7 +87,7 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Commit and push generated PDF(s)
+      - name: Commit and push generated PDF(s) to main
         if: steps.changed.outputs.has_changes == 'true'
         run: |
           git add "*.pdf"
@@ -96,3 +96,30 @@ jobs:
           fi
           git commit -m "ci: update PDF"
           git push origin HEAD:${{ github.ref_name }}
+
+      - name: Deploy PDFs to gh-pages
+        if: steps.changed.outputs.has_changes == 'true'
+        run: |
+          mkdir /tmp/gh-pages-deploy
+          cp *.pdf /tmp/gh-pages-deploy/
+
+          git fetch origin gh-pages 2>/dev/null || true
+          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
+
+          find . -mindepth 1 -not -path './.git/*' -not -name '.git' -delete
+          cp /tmp/gh-pages-deploy/*.pdf .
+
+          if [ -n "${{ steps.changed.outputs.renamed_from_b64 }}" ]; then
+            while IFS= read -r OLD_LEX; do
+              [ -z "$OLD_LEX" ] && continue
+              OLD_BASE=$(basename "$OLD_LEX" .lex)
+              rm -f "${OLD_BASE}.pdf"
+            done < <(echo "${{ steps.changed.outputs.renamed_from_b64 }}" | base64 -d)
+          fi
+
+          git add "*.pdf"
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "ci: deploy PDF to gh-pages"
+          git push origin gh-pages
