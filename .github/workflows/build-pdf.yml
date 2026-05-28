@@ -103,21 +103,26 @@ jobs:
           mkdir /tmp/gh-pages-deploy
           cp *.pdf /tmp/gh-pages-deploy/
 
+          PDF_NAME=$(ls /tmp/gh-pages-deploy/*.pdf | head -1 | xargs basename)
+          cat > /tmp/gh-pages-deploy/index.html << EOF
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta http-equiv="refresh" content="0; url=./${PDF_NAME}">
+            </head>
+            <body></body>
+          </html>
+          EOF
+
           git fetch origin gh-pages 2>/dev/null || true
           git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
 
           find . -mindepth 1 -not -path './.git/*' -not -name '.git' -delete
+
           cp /tmp/gh-pages-deploy/*.pdf .
+          cp /tmp/gh-pages-deploy/index.html .
 
-          if [ -n "${{ steps.changed.outputs.renamed_from_b64 }}" ]; then
-            while IFS= read -r OLD_LEX; do
-              [ -z "$OLD_LEX" ] && continue
-              OLD_BASE=$(basename "$OLD_LEX" .lex)
-              rm -f "${OLD_BASE}.pdf"
-            done < <(echo "${{ steps.changed.outputs.renamed_from_b64 }}" | base64 -d)
-          fi
-
-          git add "*.pdf"
+          git add -A
           if git diff --cached --quiet; then
             exit 0
           fi
