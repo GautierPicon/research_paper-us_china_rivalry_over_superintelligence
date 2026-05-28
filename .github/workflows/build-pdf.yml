@@ -103,7 +103,7 @@ jobs:
           mkdir /tmp/gh-pages-deploy
           cp *.pdf /tmp/gh-pages-deploy/
 
-          PDF_NAME=$(ls /tmp/gh-pages-deploy/*.pdf | head -1 | xargs basename)
+          PDF_NAME=$(ls /tmp/gh-pages-deploy/*.pdf | head -1 | xargs -d '\n' basename)
           cat > /tmp/gh-pages-deploy/index.html << EOF
           <!DOCTYPE html>
           <html>
