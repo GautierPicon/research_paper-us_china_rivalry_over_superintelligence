@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage[margin=2.5cm]{geometry}
-\usepackage{microtype}
+\usepackage[expansion=false]{microtype}
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{graphicx}
