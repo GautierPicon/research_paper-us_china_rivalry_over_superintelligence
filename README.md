@@ -9,9 +9,13 @@ This repository contains a research paper written in French on the technological
 
 ## Contents
 
-- **`.github/workflows/build-pdf.yml`** — Automation that detects changes in the .lex file to automatically generate an updated PDF, which is then added to the [repository](https://github.com/GautierPicon/research_paper1/blob/main/Research%20Paper%3A%20USA-China%20Rivalry%20Over%20Superintelligence.pdf) and deployed to the [website](https://gautierpicon.github.io/research_paper1/)
-- **`.lex`** — LaTeX source file for the PDF document
-- **`.pdf`** — PDF automatically generated from the .lex source file
+- Main
+    - **`.github/workflows/build-pdf.yml`** — Automation that detects changes in the .lex file to automatically generate an updated PDF, which is then added to the [repository](https://github.com/GautierPicon/research_paper1/blob/main/Research%20Paper%3A%20USA-China%20Rivalry%20Over%20Superintelligence.pdf) and deployed to the [website](https://gautierpicon.github.io/research_paper1/)
+    - **`.lex`** — LaTeX source file for the PDF document
+    - **`.pdf`** — PDF automatically generated from the .lex source file
+- gh-pages
+    - **`.pdf`** — PDF uploaded to the website
+    - **`index.html`** — ensures that the URL points to the PDF
 
 ## CI/CD
 
