@@ -22,7 +22,7 @@
     \vspace*{2cm}
 
     {\Huge\bfseries\color{bleu}
-    En quoi la rivalité technologique entre la Chine et les État-Unis est-elle une menace pour la géopolitique future ?\par}
+    En quoi la rivalité technologique entre les État-Unis et la Chine est-elle une menace pour la géopolitique future ?\par}
 
     \vspace{1cm}
 
