@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage[margin=2.5cm]{geometry}
-\usepackage[expansion=false]{microtype}
+
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{graphicx}
@@ -36,3 +36,5 @@
     }
 
 \end{titlepage}
+
+\end{document}
