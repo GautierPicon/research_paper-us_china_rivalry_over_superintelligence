@@ -86,7 +86,7 @@ jobs:
           mkdir _site
           cp *.pdf _site/
           echo "paper.mondomaine.com" > _site/CNAME
-          PDF_NAME=$(ls _site/*.pdf | head -1 | xargs basename)
+          PDF_NAME=$(basename "$(ls _site/*.pdf | head -1)")
           cat > _site/index.html << EOF
           <!DOCTYPE html>
           <html>
